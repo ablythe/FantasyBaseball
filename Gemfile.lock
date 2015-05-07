@@ -215,6 +215,7 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.0)
   jquery-rails
+  nokogiri
   pry-rails
   quiet_assets
   rails (= 4.2.0)
