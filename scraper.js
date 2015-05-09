@@ -1,6 +1,9 @@
 
 var page = require('webpage').create();
-var url = 'http://www.milb.com/roster/index.jsp?sid=t557';
+var system = require('system');
+var args = system.args;
+args.shift();
+var url = 'http://www.milb.com/roster/index.jsp?sid=milb&cid=' + String(args[0]);
 
 page.open(url, function(status) {
     var links = page.evaluate(function() {
@@ -11,9 +14,10 @@ page.open(url, function(status) {
         });
     });
     for (var i = 0; i < links.length; i++){
-      if(links[i].indexOf('player') > -1){
-        console.log(links[i]);
-      };
-    };
+        if(links[i].indexOf('player') > -1){
+            console.log(links[i]);
+          };
+        };
     phantom.exit();
 });
+

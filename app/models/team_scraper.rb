@@ -27,7 +27,7 @@ class TeamScraper
     leagues
   end
 
-  def self.get_milb_teams leagues
+  def self.get_milb_team_ids leagues
     teams = []
     leagues.each do |league|
       response = Nokogiri::HTML(open("http://www.milb.com/index.jsp?sid=l#{league[1]}"))
@@ -35,27 +35,28 @@ class TeamScraper
       links.each do |link|
         name = link.text
         id = link['href'][/[0-9]+/].to_i
-        teams.push [name, id]
+        teams.push id
       end
       sleep 1
     end
     teams
   end
 
-  def self.get_milb_players team_id 
-    response = Phantomjs.run('scraper.js')
-    players= response.split("\n")
-    players.each do |player|
-      p =player.split(', ')
-      id = p[0][/[0-9]+/].to_i
-      name = p[1].split(" ")
-      binding.pry
-      p = Player.where(mlb_id: id).first_or_create(
-        first_name: name[0], 
-        last_name: name[1], 
-        mlb_id: id
-        )
-    end
-    
+  def self.get_milb_players team_ids
+    team_ids.each do |team|
+      response = `Phantomjs scraper.js #{team}`
+      players= response.split("\n")
+      players.each do |player|
+        p =player.split(', ')
+        id = p[0][/[0-9]+/].to_i
+        name = p[1].split(" ")
+        p = Player.where(mlb_id: id).first_or_create(
+          first_name: name[0], 
+          last_name: name[1], 
+          mlb_id: id
+          )
+      end
+      sleep 2
+    end    
   end
 end
