@@ -6,7 +6,8 @@ page.open(url, function(status) {
     var links = page.evaluate(function() {
         return [].map.call(document.querySelectorAll('a'), function(link) {
             var name = link.text;
-            return link.getAttribute('href') +', '+ name;
+            var id = link.getAttribute('href').match(/player_id=.+/);
+            return id +', '+ name;
         });
     });
     for (var i = 0; i < links.length; i++){

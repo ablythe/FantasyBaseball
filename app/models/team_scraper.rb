@@ -44,7 +44,18 @@ class TeamScraper
 
   def self.get_milb_players team_id 
     response = Phantomjs.run('scraper.js')
-    binding.pry
+    players= response.split("\n")
+    players.each do |player|
+      p =player.split(', ')
+      id = p[0][/[0-9]+/].to_i
+      name = p[1].split(" ")
+      binding.pry
+      p = Player.where(mlb_id: id).first_or_create(
+        first_name: name[0], 
+        last_name: name[1], 
+        mlb_id: id
+        )
+    end
     
   end
 end
