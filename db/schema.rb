@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20150507212508) do
     t.integer  "mlb_id"
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "user_id"
+    t.string   "team"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150507212508) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
