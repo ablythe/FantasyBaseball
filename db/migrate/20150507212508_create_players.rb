@@ -4,6 +4,8 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :mlb_id
       t.string :first_name
       t.string :last_name
+      t.belongs_to :user
+      t.string :team
 
       t.timestamps null: false
     end
