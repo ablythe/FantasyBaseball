@@ -48,6 +48,7 @@ gem 'slim-rails'
 gem 'httparty'
 gem 'nokogiri'
 gem 'phantomjs'
+gem 'kaminari'
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

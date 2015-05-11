@@ -54,9 +54,11 @@ class TeamScraper
       player_data.each do |p|
         id = p.css('a')[0]['href'][/[0-9]+/].to_i
         name = p.css('a')[0].text.split(' ')
+        first = name.shift
+        last = name.join(" ")
         p =Player.where(mlb_id: id).first_or_create(
-          first_name: name[0].downcase, 
-          last_name: name[1].downcase, 
+          first_name: first.downcase, 
+          last_name: last.downcase, 
           mlb_id: id,
           team: team
           )

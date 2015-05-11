@@ -1,0 +1,26 @@
+
+=paginate @players
+table class="table table-bordered table-condensed table-hover"
+  thead
+    tr
+      th 
+        =link_to "First Name", players_path(sort: "first_name")
+      th 
+        =link_to "Last Name", players_path(sort: "last_name")
+      th 
+        =link_to "Team", players_path(sort: "team")
+      th 
+        =link_to "Owner", players_path(sort: "user_id")
+      th MLB Page
+  tbody
+    -@players.each do |player|
+      tr 
+        td="#{player.first_name}"
+        td="#{player.last_name}"
+        td= "#{player.team}"
+        -if player.user
+          td= "#{player.user.email}"
+        -else
+          td Unowned
+        td
+          =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}"

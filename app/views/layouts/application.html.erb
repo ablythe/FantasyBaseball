@@ -3,12 +3,43 @@
 <head>
   <title>FantasyBaseball</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class = "navbar navbar-default">
+    <div class ="container">
+      <div class="navbar-header">
+        <% if user_signed_in? %>
+          <div class="navbar-brand">Signed in as <%= current_user.email %></div>
+        <%else %>
+        <%= link_to "Sign in with Google", "www.google.com" %>
+        <% end %>
+      </div>
+      <div class="navbar-collapse collapse" id="navbar-main">
+        <ul class="nav navbar-nav">
+          <% if user_signed_in? %>
+          <li><%= link_to "Sign out", destroy_user_session_path,:method => :delete %><li>
+          <li><%= link_to "Home", root_path %><li>
+          <li><%= link_to "Player Roster", players_path %><li>
+          <li><%= link_to "My Team", "www.example.com" %><li>
+          <% end %>
+        </ul>
+        <div class='navbar-form navbar-right"'>
+          <%=form_tag("/players/search", method: "get") do %>
+            <div class="form-group">
+            <%=text_field_tag :last_name, nil, placeholder: "Enter Last Name" %>
+            <%=submit_tag("Player Search") %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='container'>
 
 <%= yield %>
-
+  </container>
 </body>
 </html>
