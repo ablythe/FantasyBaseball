@@ -39,12 +39,19 @@ class Player < ActiveRecord::Base
   def self.load_rosters names, id
     unknowns =[]
     names.each do |first, last|
-      player = Player.where(last_name: last, first_name: first)
-      if player.empty? || player.count > 1
+      player = Player.where(last_name: last)
+      if player.empty? 
         unknowns.push [last, first]
+      elsif player.count > 1
+        player = Player.where(last_name: last, first_name: first)
+        unless player.count > 1 || player.empty?
+          player[0].update(user_id: id)
+        else
+          unknowns.push [last, first]
+        end
       else
         player[0].update(user_id: id)
-      end
+      end 
     end
     unknowns
   end

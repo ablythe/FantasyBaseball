@@ -3,13 +3,13 @@ table class="table table-bordered table-condensed table-hover"
   thead
     tr
       th 
-        =link_to "First Name", players_path(sort: "first_name")
+        =link_to "First Name", search_index_path(last_name:@name, sort: "first_name")
       th 
-        =link_to "Last Name", players_path(sort: "last_name")
+        =link_to "Last Name", search_index_path(last_name:@name, sort: "last_name")
       th 
-        =link_to "Team", players_path(sort: "team")
+        =link_to "Team", search_index_path(last_name:@name, sort: "team")
       th 
-        =link_to "Owner", players_path(sort: "user_id")
+        =link_to "Owner", search_index_path(last_name:@name, sort: "user_id")
       th MLB Page
   tbody
     -@players.each do |player|

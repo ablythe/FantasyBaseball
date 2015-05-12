@@ -67,14 +67,18 @@ class TeamScraper
     sleep 2
   end
 
-  def self.get_milb_teams
+  def self.get_milb_teams_al
     teams =[]
     response = Nokogiri::HTML(open('http://www.milb.com/milb/info/affiliations.jsp'))
     al_teams = response.css('#affiliatesAL table')
-    nl_teams = response.css('#affiliatesNL table')
     al_milb = TeamScraper.milb_team_helper al_teams
+  end
+
+  def self.get_milb_teams_nl
+    teams =[]
+    response = Nokogiri::HTML(open('http://www.milb.com/milb/info/affiliations.jsp'))
+    nl_teams = response.css('#affiliatesNL table')
     nl_milb = TeamScraper.milb_team_helper nl_teams
-    teams = al_milb.concat(nl_milb)
   end
 
   def self.milb_team_helper division
@@ -97,7 +101,7 @@ class TeamScraper
       response = `Phantomjs scraper.js #{id}`
       players= response.split("\n")
       Player.load_players players, team
-      sleep 2
+      sleep 5
     end    
   end
 
