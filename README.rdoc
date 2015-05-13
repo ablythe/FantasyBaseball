@@ -1,3 +1,12 @@
+Uses PhantomJs and Nokogiri for scraping.
+
 Creates a searchable database of baseball players, including minor leagues and top 30 prospects per team.
 
-To set up the database, open a rails console and run TeamScraper.scrape!
+To set up the database, open a rails console and run TeamScraper.scrape! NOTE: It may be necessary to run the scraper multiple times to ensure that all teams are captured.
+
+Using the roster model, users can also load in current fantasy rosters. Currently this requires a seperate file for each user, and that the file contains player names on seperate lines.
+
+Positions - Currently positions are only loaded for players who have been claimed by a user, as it helps for display on each users team page.
+
+TODO:
+

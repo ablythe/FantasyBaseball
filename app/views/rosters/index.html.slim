@@ -1,0 +1,3 @@
+div class="list-group"
+  -@users.each do |user|
+    =link_to "#{@user.email}", roster_path(id: @user.email)

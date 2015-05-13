@@ -23,7 +23,7 @@
           <li><%= link_to "Sign out", destroy_user_session_path,:method => :delete %><li>
           <li><%= link_to "Home", root_path %><li>
           <li><%= link_to "Player Roster", players_path %><li>
-          <li><%= link_to "My Team", "www.example.com" %><li>
+          <li><%= link_to "My Team", roster_path(id: current_user) %><li>
           <% end %>
         </ul>
         <div class='navbar-form navbar-right"'>

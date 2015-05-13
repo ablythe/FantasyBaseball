@@ -19,7 +19,7 @@ class Player < ActiveRecord::Base
 
   def self.parse_roster_names file
     names = []
-    f = File.open("./#{file}", "r")
+    f = File.open("./rosters/#{file}", "r")
     f.each_line do |line|
       line.gsub!(/\W(...)\W\s+/, "")
       if line.include?(",")
@@ -52,6 +52,31 @@ class Player < ActiveRecord::Base
       else
         player[0].update(user_id: id)
       end 
+    end
+    unknowns
+  end
+
+  def self.parse_rookie_file file
+    names = []
+    f =File.open("./#{file}", "r")
+    f.each_line do |line|
+      line_array =line.split(",")
+      names.push line_array[1]
+    end
+    names
+  end
+
+  def self.load_rookie_eligibility names
+    unknowns =[]
+    Player.update_all(rookie_status: false)
+    names.each do |name|
+      name_array = name.split(" ")
+      matches= Player.where(first_name: name_array[0], last_name: name_array[1])
+      if matches.count > 1 || matches.empty?
+        unknowns.push names
+      else
+        matches[0].update!(rookie_status: true)
+      end
     end
     unknowns
   end

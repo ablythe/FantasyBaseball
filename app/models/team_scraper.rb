@@ -40,8 +40,10 @@ class TeamScraper
     TeamScraper.get_mlb_players 
 
     #milb players
-    teams = TeamScraper.get_milb_teams
-    TeamScraper.get_milb_players teams
+    al_teams = TeamScraper.get_milb_teams_al
+    nl_teams =TeamScraper.get_milb_teams_nl
+    TeamScraper.get_milb_players al_teams
+    TeamScraper.get_milb_players nl_teams
 
     #mlb prospects
     TeamScraper.get_mlb_prospects
@@ -111,6 +113,18 @@ class TeamScraper
       players = response.split("\n")
       Player.load_players players, team
       sleep 2
+    end
+  end
+
+  def self.get_positions user_id
+    players = User.find(user_id).players.all 
+    players.each do |player|
+      unless player.mlb_id == 0
+        response = `Phantomjs position_scraper.js #{player.mlb_id}`
+        position = response[1..-1].strip
+        player.update!(position: position)
+        sleep 2
+      end
     end
   end
 

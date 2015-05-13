@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :search, only: [:index], path: 'players/search'
   resources :players, only: [:show, :index] 
 
-  
 
-  resources :rosters
+  resources :rosters, only: [:index, :show, :update]
 end

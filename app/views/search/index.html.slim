@@ -3,9 +3,11 @@ table class="table table-bordered table-condensed table-hover"
   thead
     tr
       th 
+        =link_to "Last Name", search_index_path(last_name:@name, sort: "last_name")
+      th 
         =link_to "First Name", search_index_path(last_name:@name, sort: "first_name")
       th 
-        =link_to "Last Name", search_index_path(last_name:@name, sort: "last_name")
+        =link_to "Position", search_index_path(last_name:@name, sort: "position")
       th 
         =link_to "Team", search_index_path(last_name:@name, sort: "team")
       th 
@@ -14,12 +16,16 @@ table class="table table-bordered table-condensed table-hover"
   tbody
     -@players.each do |player|
       tr 
-        td="#{player.first_name}"
         td="#{player.last_name}"
+        td="#{player.first_name}"
+        td="#{player.position}"
         td= "#{player.team}"
         -if player.user
           td= "#{player.user.email}"
         -else
           td Unowned
         td
-          =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}"
+          -unless player.mlb_id == 0
+            =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}"
+          -else
+            p PROSPECT
