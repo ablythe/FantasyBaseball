@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513003046) do
+ActiveRecord::Schema.define(version: 20150513184834) do
 
   create_table "players", force: :cascade do |t|
     t.integer  "mlb_id"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 20150513003046) do
     t.datetime "updated_at",                    null: false
     t.string   "position"
     t.boolean  "rookie_status", default: false
+    t.integer  "roster_id"
+  end
+
+  create_table "rosters", force: :cascade do |t|
+    t.integer "user_id"
+    t.boolean "forty_five"
+    t.boolean "minor"
   end
 
   create_table "team_scrapers", force: :cascade do |t|

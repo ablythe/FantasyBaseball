@@ -1,5 +1,6 @@
 class Player < ActiveRecord::Base
   belongs_to :user 
+  belongs_to :roster
 
   def self.load_players players, team 
    players.each do |player|
@@ -36,22 +37,20 @@ class Player < ActiveRecord::Base
     names
   end
 
-  def self.load_rosters names, id
+  def self.load_rosters names, id, level
     unknowns =[]
+    if level == "minor"
+      roster = User.find(id).rosters.find_by(minor: true)
+    elsif level == "forty_five"
+      roster = User.find(id).rosters.find_by(forty_five: true)
+    end
     names.each do |first, last|
-      player = Player.where(last_name: last)
-      if player.empty? 
-        unknowns.push [last, first]
-      elsif player.count > 1
-        player = Player.where(last_name: last, first_name: first)
-        unless player.count > 1 || player.empty?
-          player[0].update(user_id: id)
-        else
-          unknowns.push [last, first]
-        end
+      player = Player.where(last_name: last, first_name: first)
+      unless player.count > 1 || player.empty?
+        player[0].update(user_id: id, roster_id: roster.id )
       else
-        player[0].update(user_id: id)
-      end 
+        unknowns.push [last, first]
+      end
     end
     unknowns
   end
@@ -61,7 +60,7 @@ class Player < ActiveRecord::Base
     f =File.open("./#{file}", "r")
     f.each_line do |line|
       line_array =line.split(",")
-      names.push line_array[1]
+      names.push line_array[1].downcase
     end
     names
   end
@@ -72,9 +71,9 @@ class Player < ActiveRecord::Base
     names.each do |name|
       name_array = name.split(" ")
       matches= Player.where(first_name: name_array[0], last_name: name_array[1])
-      if matches.count > 1 || matches.empty?
-        unknowns.push names
-      else
+      if matches.count > 1 
+        unknowns.push name_array
+      elsif !matches.empty?
         matches[0].update!(rookie_status: true)
       end
     end

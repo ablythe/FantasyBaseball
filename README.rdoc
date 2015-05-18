@@ -8,5 +8,5 @@ Using the roster model, users can also load in current fantasy rosters. Currentl
 
 Positions - Currently positions are only loaded for players who have been claimed by a user, as it helps for display on each users team page.
 
-TODO:
+
 

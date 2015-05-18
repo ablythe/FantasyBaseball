@@ -1,3 +1,8 @@
-div class="list-group"
-  -@users.each do |user|
-    =link_to "#{@user.email}", roster_path(id: @user.email)
+div class= "col-md-3"
+div class= "col-md-6 panel panel-primary"
+  div class="panel-heading" 
+    div class= "panel-title" Fantasy Teams
+  div class="list-group panel-body"
+    -@users.each do |user|
+      =link_to "#{user.email}", roster_path(id: user.id), class:"list-group-item"
+div class="col-md-3"

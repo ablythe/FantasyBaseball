@@ -14,15 +14,15 @@
         <% if user_signed_in? %>
           <div class="navbar-brand">Signed in as <%= current_user.email %></div>
         <%else %>
-        <%= link_to "Sign in with Google", "www.google.com" %>
+        <div class="navbar-brand"><%=link_to "Sign in", new_user_session_path %></div>
         <% end %>
       </div>
       <div class="navbar-collapse collapse" id="navbar-main">
         <ul class="nav navbar-nav">
           <% if user_signed_in? %>
           <li><%= link_to "Sign out", destroy_user_session_path,:method => :delete %><li>
-          <li><%= link_to "Home", root_path %><li>
           <li><%= link_to "Player Roster", players_path %><li>
+          <li><%= link_to "Fantasy Teams", rosters_path %><li>
           <li><%= link_to "My Team", roster_path(id: current_user) %><li>
           <% end %>
         </ul>

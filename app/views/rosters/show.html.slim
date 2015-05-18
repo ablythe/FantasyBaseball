@@ -1,9 +1,42 @@
+h2
+  = "#{@user.email}'s 45 man Roster"  
+h4
+  a href="#minor" Jump To Minors Roster
 -positions ={Pitchers: @pitchers, Catchers: @catchers, Infielders: @infielders, Outfielders: @outfielders, "Designated Hitters": @dhs }
 -positions.each do |position, names|
   table class="table table-bordered table-condensed table-hover"
-    thead 
+    caption
       b
         = "#{position}"
+    thead 
+      tr
+        th 
+          =link_to "Last Name", players_path(sort: "last_name")
+        th 
+          =link_to "First Name", players_path(sort: "first_name")
+        th 
+          =link_to "Team", players_path(sort: "team")
+        th MLB Page
+    tbody
+      -names.each do |player|
+        tr 
+          td="#{player.last_name}"
+          td="#{player.first_name}"
+          td= "#{player.team}"
+          td
+            -unless player.mlb_id == 0
+              =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}"
+            -else
+              p PROSPECT
+a name="minor"
+h2 Minors Roster
+-positions ={Pitchers: @pitchers_minor, Catchers: @catchers_minor, Infielders: @infielders_minor, Outfielders: @outfielders_minor, "Designated Hitters": @dhs_minor }
+-positions.each do |position, names|
+  table class="table table-bordered table-condensed table-hover"
+    caption
+      b
+        = "#{position}"
+    thead 
       tr
         th 
           =link_to "Last Name", players_path(sort: "last_name")
