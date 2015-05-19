@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-
+  skip_before_filter :authenticate_user!
   def index
     unless params["sort"]
       sort = "last_name"

@@ -26,14 +26,16 @@
           <li><%= link_to "My Team", roster_path(id: current_user) %><li>
           <% end %>
         </ul>
-        <div class='navbar-form navbar-right"'>
-          <%=form_tag("/players/search", method: "get") do %>
-            <div class="form-group">
-            <%=text_field_tag :last_name, nil, placeholder: "Enter Last Name" %>
-            <%=submit_tag("Player Search") %>
-            </div>
-          <% end %>
-        </div>
+        <% if user_signed_in? %>
+          <div class='navbar-form navbar-right"'>
+            <%=form_tag("/players/search", method: "get") do %>
+              <div class="form-group">
+              <%=text_field_tag :last_name, nil, placeholder: "Enter Last Name" %>
+              <%=submit_tag("Player Search") %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
