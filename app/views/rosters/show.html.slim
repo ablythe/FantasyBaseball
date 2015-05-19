@@ -3,6 +3,7 @@ h2
 h4
   a href="#minor" Jump To Minors Roster
 -positions ={Pitchers: @pitchers, Catchers: @catchers, Infielders: @infielders, Outfielders: @outfielders, "Designated Hitters": @dhs }
+- x = 0
 -positions.each do |position, names|
   table class="table table-bordered table-condensed table-hover"
     caption
@@ -10,6 +11,7 @@ h4
         = "#{position}"
     thead 
       tr
+        th #
         th 
           =link_to "Last Name", players_path(sort: "last_name")
         th 
@@ -19,7 +21,9 @@ h4
         th MLB Page
     tbody
       -names.each do |player|
+        -x += 1
         tr 
+          td= "#{x}"
           td="#{player.last_name}"
           td="#{player.first_name}"
           td= "#{player.team}"
@@ -31,6 +35,7 @@ h4
 a name="minor"
 h2 Minors Roster
 -positions ={Pitchers: @pitchers_minor, Catchers: @catchers_minor, Infielders: @infielders_minor, Outfielders: @outfielders_minor, "Designated Hitters": @dhs_minor }
+- y = 0
 -positions.each do |position, names|
   table class="table table-bordered table-condensed table-hover"
     caption
@@ -38,6 +43,7 @@ h2 Minors Roster
         = "#{position}"
     thead 
       tr
+        th #
         th 
           =link_to "Last Name", players_path(sort: "last_name")
         th 
@@ -47,7 +53,9 @@ h2 Minors Roster
         th MLB Page
     tbody
       -names.each do |player|
+        -y += 1
         tr 
+          td="#{y}"
           td="#{player.last_name}"
           td="#{player.first_name}"
           td= "#{player.team}"
