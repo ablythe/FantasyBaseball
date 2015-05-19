@@ -9,26 +9,28 @@ class RostersController < ApplicationController
     unless params["sort"]
       sort = "last_name"
     else
-      sort = params["sort"]
+      sort = params["sort"].to_sym
     end
-    @pitchers = @user.rosters.find_by(forty_five: true).players.where(position: "P").order(sort.to_sym)
-    @catchers = @user.rosters.find_by(forty_five: true).players.where(position: "C").order(sort.to_sym)
-    @infielders = @user.rosters.find_by(forty_five: true).players.where("position LIKE ?", "%B").order(sort.to_sym)
-    ss = @user.rosters.find_by(forty_five: true).players.where(position: "SS").order(sort.to_sym)
+    roster_major = @user.rosters.find_by(forty_five: true)
+    @pitchers = roster_major.players.where(position: "P").order(sort)
+    @catchers = roster_major.players.where(position: "C").order(sort)
+    @infielders = roster_major.players.where("position LIKE ?", "%B").order(sort)
+    ss = roster_major.players.where(position: "SS").order(sort)
     ss.each do |p|
       @infielders.push p 
     end
-    @outfielders = @user.rosters.find_by(forty_five: true).players.where("position LIKE ?", "%F").order(sort.to_sym)
-    @dhs = @user.rosters.find_by(forty_five: true).players.where(position: "DH").order(sort.to_sym)
-
-    @pitchers_minor = @user.rosters.find_by(minor: true).players.where(position: "P").order(sort.to_sym)
-    @catchers_minor = @user.rosters.find_by(minor: true).players.where(position: "C").order(sort.to_sym)
-    @infielders_minor = @user.rosters.find_by(minor: true).players.where("position LIKE ?", "%B").order(sort.to_sym)
-    ss_minors = @user.rosters.find_by(minor: true).players.where(position: "SS").order(sort.to_sym)
+    @outfielders = roster_major.players.where("position LIKE ?", "%F").order(sort)
+    @dhs = roster_major.players.where(position: "DH").order(sort)
+    
+    roster_minor =@user.rosters.find_by(minor: true)
+    @pitchers_minor = roster_minor.players.where(position: "P").order(sort)
+    @catchers_minor = roster_minor.players.where(position: "C").order(sort)
+    @infielders_minor = roster_minor.players.where("position LIKE ?", "%B").order(sort)
+    ss_minors = roster_minor.players.where(position: "SS").order(sort)
     ss_minors.each do |p|
       @infielders_minor.push p 
     end
-    @outfielders_minor = @user.rosters.find_by(minor: true).players.where("position LIKE ?", "%F").order(sort.to_sym)
-    @dhs_minor = @user.rosters.find_by(minor: true).players.where(position: "DH").order(sort.to_sym)
+    @outfielders_minor = roster_minor.players.where("position LIKE ?", "%F").order(sort)
+    @dhs_minor = roster_minor.players.where(position: "DH").order(sort)
   end
 end
