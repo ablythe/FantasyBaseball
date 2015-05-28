@@ -29,7 +29,7 @@ h4
           td= "#{player.team}"
           td
             -unless player.mlb_id == 0
-              =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}"
+              =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
             -else
               p PROSPECT
 a name="minor"
@@ -61,6 +61,6 @@ h2 Minors Roster
           td= "#{player.team}"
           td
             -unless player.mlb_id == 0
-              =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}"
+              =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
             -else
               p PROSPECT
