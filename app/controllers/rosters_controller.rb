@@ -35,5 +35,12 @@ class RostersController < ApplicationController
     @right_minor = roster_minor.players.where(position: "RF").order(sort)
     @center_minor = roster_minor.players.where(position: "CF").order(sort)
     @dhs_minor = roster_minor.players.where(position: "DH").order(sort)
+    @count = roster_major.players.count + roster_minor.players.count
+  end
+
+  def update
+    player = Player.find(params['player_id'])
+    player.update(roster_id: nil, user_id: nil)
+    redirect_to :back
   end
 end

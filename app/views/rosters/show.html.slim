@@ -1,3 +1,5 @@
+
+h2 = "Player Count: #{@count}"
 h2
   = "#{@user.email}'s 45 man Roster"  
 h4
@@ -19,6 +21,7 @@ h4
         th 
           =link_to "Team", players_path(sort: "team")
         th MLB Page
+        th 
     tbody
       -names.each do |player|
         -x += 1
@@ -32,6 +35,8 @@ h4
               =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
             -else
               p PROSPECT
+          td
+            = button_to "Drop Player", {action: "update",id: "#{player.roster.id}", player_id: "#{player.id}"}, method: :put
 a name="minor"
 h2 Minors Roster
 -positions ={Pitchers: @pitchers_minor, Catchers: @catchers_minor, "First Base": @first_minor, "Second Base": @second_minor, "Short Stop": @ss_minor, "Third Base": @third_minor, "Right Field": @right_minor, "Center Field": @center_minor, "Left Field": @left_minor, "Designated Hitters": @dhs_minor }
@@ -51,6 +56,7 @@ h2 Minors Roster
         th 
           =link_to "Team", players_path(sort: "team")
         th MLB Page
+        th 
     tbody
       -names.each do |player|
         -y += 1
@@ -64,3 +70,5 @@ h2 Minors Roster
               =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
             -else
               p PROSPECT
+          td
+            = button_to "Drop Player", {action: "update",id: "#{player.roster.id}", player_id: "#{player.id}"}, method: :put
