@@ -3,8 +3,13 @@ Rails.application.routes.draw do
   
   root 'players#index'
   resources :search, only: [:index], path: 'players/search'
-  resources :players, only: [:show, :index] 
+  resources :players, only: [:show, :index] do
+    member do
+      get "claim"
+    end
+  end
 
 
   resources :rosters, only: [:index, :show, :update]
+    
 end

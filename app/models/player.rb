@@ -1,3 +1,4 @@
+require 'open-uri'
 class Player < ActiveRecord::Base
   belongs_to :user 
   belongs_to :roster
@@ -78,6 +79,14 @@ class Player < ActiveRecord::Base
       end
     end
     unknowns
+  end
+
+  def get_position 
+    unless mlb_id == 0
+        response = Nokogiri::HTML(open("http://mlb.mlb.com/team/player.jsp?player_id=#{mlb_id}"))
+        position = response.css('div.player-vitals li').first.text
+        update!(position: position)
+      end
   end
 
 end

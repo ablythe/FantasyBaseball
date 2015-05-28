@@ -14,4 +14,11 @@ class PlayersController < ApplicationController
     @players = Player.page(@page).order(sort.to_sym)
 
   end
+
+  def claim
+    @player = Player.find(params['id'])
+    @user = current_user
+    @major = @user.rosters.find_by(forty_five: true)
+    @minor = @user.rosters.find_by(minor: true)
+  end
 end

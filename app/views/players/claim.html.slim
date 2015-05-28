@@ -1,0 +1,5 @@
+
+h3 = "Select which roster to add #{@player.first_name} #{@player.last_name} to:"
+= button_to "45 Man Roster", {action: "update", controller: "rosters", id: @major, player_id: @player.id}, method: :put
+br
+= button_to "Minors Roster", {action: "update",controller: "rosters", id: @minor, player_id: @player.id}, method: :put

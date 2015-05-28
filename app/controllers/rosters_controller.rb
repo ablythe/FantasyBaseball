@@ -40,7 +40,16 @@ class RostersController < ApplicationController
 
   def update
     player = Player.find(params['player_id'])
-    player.update(roster_id: nil, user_id: nil)
-    redirect_to :back
+    if player.roster_id?
+      player.update(roster_id: nil, user_id: nil)
+    else
+      player.update(roster_id: params["id"], user_id: current_user.id)
+      unless player.position
+        player.get_position
+      end
+    end
+    redirect_to roster_path(current_user.rosters.first)
   end
+
+  
 end

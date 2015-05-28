@@ -119,14 +119,11 @@ class TeamScraper
   def self.get_positions user_id
     players = User.find(user_id).players.all 
     players.each do |player|
-      unless player.mlb_id == 0
-        response = `Phantomjs position_scraper.js #{player.mlb_id}`
-        position = response[1..-1].strip
-        player.update!(position: position)
-        sleep 2
-      end
+      player.get_position
+      sleep 2
     end
   end
+
 
   #not currently used
   def self.get_milb_leagues
