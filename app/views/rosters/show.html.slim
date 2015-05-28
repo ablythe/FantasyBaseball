@@ -2,7 +2,7 @@ h2
   = "#{@user.email}'s 45 man Roster"  
 h4
   a href="#minor" Jump To Minors Roster
--positions ={Pitchers: @pitchers, Catchers: @catchers, Infielders: @infielders, Outfielders: @outfielders, "Designated Hitters": @dhs }
+-positions ={Pitchers: @pitchers, Catchers: @catchers, "First Base": @first, "Second Base": @second, "Short Stop": @ss, "Third Base": @third, "Right Field": @right, "Center Field": @center, "Left Field": @left, "Designated Hitters": @dhs }
 - x = 0
 -positions.each do |position, names|
   table class="table table-bordered table-condensed table-hover"
@@ -34,7 +34,7 @@ h4
               p PROSPECT
 a name="minor"
 h2 Minors Roster
--positions ={Pitchers: @pitchers_minor, Catchers: @catchers_minor, Infielders: @infielders_minor, Outfielders: @outfielders_minor, "Designated Hitters": @dhs_minor }
+-positions ={Pitchers: @pitchers_minor, Catchers: @catchers_minor, "First Base": @first_minor, "Second Base": @second_minor, "Short Stop": @ss_minor, "Third Base": @third_minor, "Right Field": @right_minor, "Center Field": @center_minor, "Left Field": @left_minor, "Designated Hitters": @dhs_minor }
 - y = 0
 -positions.each do |position, names|
   table class="table table-bordered table-condensed table-hover"
