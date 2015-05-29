@@ -1,23 +1,19 @@
 class SearchController < ApplicationController
 
   def create
-    unless params["first_name"] == "" || params["first_name"] == nil
-      @first_name = params["first_name"].downcase
-    else
-      @first_name = nil
+    new_params = {
+      first_name: params['first_name'], 
+      last_name: params['last_name'],
+      team: params['team']
+    }
+    new_params.each do |k,v| 
+      if v == "" || v == nil
+        new_params[k] = nil
+      else
+        new_params[k] = v.downcase
+      end
     end
-    unless params["team"] == "" || params["team"] == nil
-      @team = params["team"].downcase
-    else
-      @team = nil
-    end
-    unless params["last_name"] == "" || params["last_name"] == nil
-      @last_name = params["last_name"].downcase
-    else
-      @last_name = nil
-    end
-    
-    redirect_to search_index_path(last_name: @last_name, first_name: @first_name, team: @team)
+    redirect_to search_index_path(new_params)
   end
 
   def index
