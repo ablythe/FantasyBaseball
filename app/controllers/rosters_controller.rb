@@ -48,7 +48,7 @@ class RostersController < ApplicationController
         player.get_position
       end
     end
-    redirect_to roster_path(current_user.rosters.first)
+    redirect_to roster_path(current_user.rosters.first), alert: "Roster Updated"
   end
 
   

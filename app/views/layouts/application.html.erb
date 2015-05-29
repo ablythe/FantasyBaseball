@@ -28,7 +28,7 @@
         </ul>
         <% if user_signed_in? %>
           <div class='navbar-form navbar-right"'>
-            <%=form_tag("/players/search", method: "get") do %>
+            <%=form_tag("/players", method: "get") do %>
               <div class="form-group">
               <%=text_field_tag :last_name, nil, placeholder: "Enter Last Name" %>
               <%=submit_tag("Player Search") %>
@@ -38,6 +38,11 @@
         <% end %>
       </div>
     </div>
+  </div>
+  <div class= "container">
+    <% if alert %>
+      <p class="alert alert-success"><%= alert %></p>
+    <%end %>
   </div>
   <div class='container'>
 
