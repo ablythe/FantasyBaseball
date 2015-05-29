@@ -89,6 +89,40 @@ class Player < ActiveRecord::Base
       end
   end
 
-  
+  def self.search options
+    if options[:last_name] && options[:first_name] && options[:team] 
+      results = Player.
+          where("last_name LIKE ? and first_name LIKE ? and team = ?", 
+            "#{options['last_name'][0..3]}%",
+            "#{options['first_name'][0..3]}%",
+            "#{options['team']}"
+            )
+    elsif options[:last_name] && options[:first_name]
+      results = Player.
+          where("last_name LIKE ? and first_name LIKE ?", 
+            "#{options['last_name'][0..3]}%",
+            "#{options['first_name'][0..3]}%"
+            )
+    elsif options[:first_name] && options[:team]
+      results = Player.
+          where("first_name LIKE ? and team = ?", 
+            "#{options['first_name'][0..3]}%",
+            "#{options['team']}"
+            )
+    elsif options[:last_name] && options[:team] 
+      results = Player.
+          where("last_name LIKE ? and team = ?", 
+            "#{options['last_name'][0..3]}%",
+            "#{options['team']}"
+            )
+    elsif options[:last_name]
+      results = Player.where("last_name LIKE ?","#{options['last_name'][0..3]}%")
+    elsif options[:first_name]
+      results = Player.where("first_name LIKE ?","#{options['first_name'][0..3]}%")
+    elsif options[:team]
+      results = Player.where(team: "#{options['team']}")      
+    end
+    results
+  end
 
 end

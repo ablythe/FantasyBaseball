@@ -1,0 +1,13 @@
+h2 Advanced Search
+= form_tag("/players/search", method: "post") do 
+  =hidden_field_tag "search", true
+  div class="form-group"
+  =label_tag :last_name, "Last Name:"
+  =text_field_tag :last_name, nil, placeholder: "Last Name"
+  div class="form-group"
+  =label_tag :first_name, "First Name:"
+  =text_field_tag :first_name, nil, placeholder: "First Name"
+  div class="form-group"
+  =label_tag :team, "Team:"
+  =select_tag :team, options_for_select([[" ", nil],['ana', 'ana'],['ari','ari'],['atl', 'atl'],['bal', 'bal'], ['bos', 'bos'],['chc', 'chc'],['cin', 'cin'],['cle','cle'], ['col','col'],['cws','cws'],['det', 'det'],['hou', 'hou'],['kc','kc'],['la', 'la'],['mia', 'mia'],['mil', 'mil'],['min','min'],['nym', 'nym'],['nyy', 'nyy'], ['oak', 'oak'],['phi', 'phi'],['pit', 'pit'], ['sd','sd'],['sea', 'sea'],['sf', 'sf'],['stl', 'stl'],['tb','tb'],['tex', 'tex'],['tor','tor'],['was', 'was']])
+  =submit_tag("Search")

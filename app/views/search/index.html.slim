@@ -1,17 +1,25 @@
-h3 = "Players with last name starting with: \"#{@name}\""
+h2 Search Results for:
+-if @first_name
+  h3 ="First Name: #{@first_name}" 
+-if @last_name
+  h3 = "Last Name: #{@last_name}" 
+-if @team
+  h3 = "Team: #{@team}"
+=paginate @players
 table class="table table-bordered table-condensed table-hover"
   thead
     tr
       th 
-        =link_to "Last Name", search_index_path(last_name:@name, sort: "last_name")
+        =link_to "Last Name", search_index_path(first_name: @first_name, last_name: @last_name, team: @team, sort: "last_name")
       th 
-        =link_to "First Name", search_index_path(last_name:@name, sort: "first_name")
+        =link_to "First Name", search_index_path(first_name: @first_name, last_name: @last_name, team: @team, sort: "first_name")
       th 
-        =link_to "Position", search_index_path(last_name:@name, sort: "position")
+        =link_to "Position", search_index_path(first_name: @first_name, last_name: @last_name, team: @team, sort: "position")
       th 
-        =link_to "Team", search_index_path(last_name:@name, sort: "team")
-      th 
-        =link_to "Owner", search_index_path(last_name:@name, sort: "user_id")
+        =link_to "Team", search_index_path(first_name: @first_name, last_name: @last_name, team: @team, sort: "team")
+      -if current_user
+        th 
+          =link_to "Owner", search_index_path(first_name: @first_name, last_name: @last_name, team: @team, sort: "user_id")
       th MLB Page
   tbody
     -@players.each do |player|
@@ -20,12 +28,13 @@ table class="table table-bordered table-condensed table-hover"
         td="#{player.first_name}"
         td="#{player.position}"
         td= "#{player.team}"
-        -if player.user
-          td= "#{player.user.email}"
-        -else
-          td = link_to "Claim Player", claim_player_path(id: player.id)
+        -if current_user
+          -if player.user
+            td= "#{player.user.email}"
+          -else
+            td = link_to "Claim Player", claim_player_path(id: player.id)
         td
           -unless player.mlb_id == 0
-            =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}"
+            =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
           -else
             p PROSPECT

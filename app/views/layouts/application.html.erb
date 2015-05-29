@@ -24,12 +24,14 @@
           <li><%= link_to "Player Roster", players_path %><li>
           <li><%= link_to "Fantasy Teams", rosters_path %><li>
           <li><%= link_to "My Team", roster_path(id: current_user) %><li>
+          <li><%= link_to "Advanced Search", new_search_path %><li>
           <% end %>
         </ul>
         <% if user_signed_in? %>
           <div class='navbar-form navbar-right"'>
-            <%=form_tag("/players", method: "get") do %>
+            <%=form_tag("/players/search", method: "post") do %>
               <div class="form-group">
+              <%=hidden_field_tag "search", true %>
               <%=text_field_tag :last_name, nil, placeholder: "Enter Last Name" %>
               <%=submit_tag("Player Search") %>
               </div>
