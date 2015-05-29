@@ -19,11 +19,8 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def self.parse_roster_names file
-    names = []
-    f = File.open("./rosters/#{file}", "r")
-    f.each_line do |line|
-      line.gsub!(/\W(...)\W\s+/, "")
+  def self.clean_lines line
+    line.gsub!(/\W(...)\W\s+/, "")
       if line.include?(",")
         name = line.split(", ")
         first = name[1].strip.downcase
@@ -33,18 +30,22 @@ class Player < ActiveRecord::Base
         first = name.shift.downcase
         last  = name.join(" ").strip.downcase
       end
-      names.push [first, last]
+    return [first, last]
+  end
+
+  def self.parse_roster_names file
+    names = []
+    f = File.open("./rosters/#{file}", "r")
+    f.each_line do |line|
+      names.push Player.clean_lines line
     end
     names
   end
 
   def self.load_rosters names, id, level
     unknowns =[]
-    if level == "minor"
-      roster = User.find(id).rosters.find_by(minor: true)
-    elsif level == "forty_five"
-      roster = User.find(id).rosters.find_by(forty_five: true)
-    end
+    roster = User.find(id).rosters.find_by("#{level}": true)
+    binding.pry
     names.each do |first, last|
       player = Player.where(last_name: last, first_name: first)
       unless player.count > 1 || player.empty?
@@ -89,20 +90,28 @@ class Player < ActiveRecord::Base
       end
   end
 
+  def self.full_search last, first, team
+    results = Player.
+          where("last_name LIKE ? and first_name LIKE ? and team = ?", 
+            "#{last[0..3]}%",
+            "#{first[0..3]}%",
+            "#{team}"
+            )
+  end
+
+  def self.full_name_search last, first
+    results = Player.
+            where("last_name LIKE ? and first_name LIKE ?", 
+            "#{last[0..3]}%",
+            "#{first[0..3]}%"
+            )
+  end
+
   def self.search options
     if options[:last_name] && options[:first_name] && options[:team] 
-      results = Player.
-          where("last_name LIKE ? and first_name LIKE ? and team = ?", 
-            "#{options['last_name'][0..3]}%",
-            "#{options['first_name'][0..3]}%",
-            "#{options['team']}"
-            )
+      results = Player.full_search options[:last_name], options[:first_name], options[:team]
     elsif options[:last_name] && options[:first_name]
-      results = Player.
-          where("last_name LIKE ? and first_name LIKE ?", 
-            "#{options['last_name'][0..3]}%",
-            "#{options['first_name'][0..3]}%"
-            )
+      results = Player.full_name_search options[:last_name], options[:first_name]
     elsif options[:first_name] && options[:team]
       results = Player.
           where("first_name LIKE ? and team = ?", 
