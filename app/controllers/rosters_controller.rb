@@ -22,8 +22,10 @@ class RostersController < ApplicationController
 
   def update
     player = Player.find(params['player_id'])
-    if player.roster_id?
+    if player.roster_id? && player.user_id == current_user.id
       player.update(roster_id: nil, user_id: nil)
+    elsif player.roster_id? && player.user_id != current_user.id
+      redirect_to roster_path(current_user.rosters.first), alert: "Drop failed. Player does not belong to you"
     else
       player.update(roster_id: params["id"], user_id: current_user.id)
       unless player.position

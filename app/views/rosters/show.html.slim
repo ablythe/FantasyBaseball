@@ -21,7 +21,8 @@ h4
         th 
           =link_to "Team", players_path(sort: "team")
         th MLB Page
-        th 
+        -if @user == current_user
+          th 
     tbody
       -@roster_major.each do |player|
         -if player.position == pos
@@ -36,8 +37,9 @@ h4
                 =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
               -else
                 p PROSPECT
-            td
-              = button_to "Drop Player", {action: "update",id: "#{player.roster.id}", player_id: "#{player.id}"}, method: :put
+            -if @user == current_user
+              td
+                = button_to "Drop Player", {action: "update",id: "#{player.roster.id}", player_id: "#{player.id}"}, method: :put
 a name="minor"
 h2 Minors Roster
 - y = 0
