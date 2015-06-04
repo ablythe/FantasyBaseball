@@ -51,6 +51,7 @@ gem 'nokogiri'
 gem 'phantomjs'
 gem 'kaminari'
 gem 'pg'
+gem 'oauth-plugin'
 
 gem 'rails_12factor'
 group :development, :test do

@@ -1,77 +1,83 @@
 
-h2 = "Player Count: #{@count}"
-h2
-  = "#{@user.email}'s 45 man Roster"  
-h4
-  a href="#minor" Jump To Minors Roster
--positions ={"Pitchers": "P", 'Catchers': "C", "First Base": "1B", "Second Base": "2B", "Short Stop": 'SS', "Third Base": '3B', "Right Field": 'RF', "Center Field": 'CF', "Left Field": 'LF', "Designated Hitters": 'DH' }
-- x = 0
--positions.each do |position, pos|
-  table class="table table-bordered table-condensed table-hover"
-    caption
-      b
-        = "#{position}"
-    thead 
-      tr
-        th #
-        th 
-          =link_to "Last Name", players_path(sort: "last_name")
-        th 
-          =link_to "First Name", players_path(sort: "first_name")
-        th 
-          =link_to "Team", players_path(sort: "team")
-        th MLB Page
-        -if @user == current_user
+div class="row"
+  div class="col-md-6"
+    h3 = "Player Count: #{@count}"
+    
+  div class="col-md-6"
+    h3 ="Starts Used: #{@user.starts}"
+    h3 ="Starts Remaining: #{195-@user.starts}"
+div class="row"
+  h3 = "#{@user.email}'s 45 man Roster"  
+  h5
+    a href="#minor" Jump To Minors Roster
+  -positions ={"Pitchers": "P", 'Catchers': "C", "First Base": "1B", "Second Base": "2B", "Short Stop": 'SS', "Third Base": '3B', "Right Field": 'RF', "Center Field": 'CF', "Left Field": 'LF', "Designated Hitters": 'DH' }
+  - x = 0
+  -positions.each do |position, pos|
+    table class="table table-bordered table-condensed table-hover"
+      caption
+        b
+          = "#{position}"
+      thead 
+        tr
+          th #
           th 
-    tbody
-      -@roster_major.each do |player|
-        -if player.position == pos
-          -x += 1
-          tr 
-            td= "#{x}"
-            td="#{player.last_name}"
-            td="#{player.first_name}"
-            td= "#{player.team}"
-            td
-              -unless player.mlb_id == 0
-                =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
-              -else
-                p PROSPECT
-            -if @user == current_user
+            =link_to "Last Name", players_path(sort: "last_name")
+          th 
+            =link_to "First Name", players_path(sort: "first_name")
+          th 
+            =link_to "Team", players_path(sort: "team")
+          th MLB Page
+          -if @user == current_user
+            th 
+      tbody
+        -@roster_major.each do |player|
+          -if player.position == pos
+            -x += 1
+            tr 
+              td= "#{x}"
+              td="#{player.last_name}"
+              td="#{player.first_name}"
+              td= "#{player.team}"
+              td
+                -unless player.mlb_id == 0
+                  =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
+                -else
+                  p PROSPECT
+              -if @user == current_user
+                td
+                  = button_to "Drop Player", {action: "update",id: "#{player.roster.id}", player_id: "#{player.id}"}, method: :put
+  a name="minor"
+  h2 Minors Roster
+  - y = 0
+  -positions.each do |position, pos|
+    table class="table table-bordered table-condensed table-hover"
+      caption
+        b
+          = "#{position}"
+      thead 
+        tr
+          th #
+          th 
+            =link_to "Last Name", players_path(sort: "last_name")
+          th 
+            =link_to "First Name", players_path(sort: "first_name")
+          th 
+            =link_to "Team", players_path(sort: "team")
+          th MLB Page
+          th 
+      tbody
+        -@roster_minor.each do |player|
+          -if player.position == pos
+            -y += 1
+            tr 
+              td="#{y}"
+              td="#{player.last_name}"
+              td="#{player.first_name}"
+              td= "#{player.team}"
+              td
+                -unless player.mlb_id == 0
+                  =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
+                -else
+                  p PROSPECT
               td
                 = button_to "Drop Player", {action: "update",id: "#{player.roster.id}", player_id: "#{player.id}"}, method: :put
-a name="minor"
-h2 Minors Roster
-- y = 0
--positions.each do |position, pos|
-  table class="table table-bordered table-condensed table-hover"
-    caption
-      b
-        = "#{position}"
-    thead 
-      tr
-        th #
-        th 
-          =link_to "Last Name", players_path(sort: "last_name")
-        th 
-          =link_to "First Name", players_path(sort: "first_name")
-        th 
-          =link_to "Team", players_path(sort: "team")
-        th MLB Page
-        th 
-    tbody
-      -@roster_minor.each do |player|
-        -if player.position == pos
-          -y += 1
-          tr 
-            td="#{y}"
-            td="#{player.last_name}"
-            td="#{player.first_name}"
-            td= "#{player.team}"
-            td
-              -unless player.mlb_id == 0
-                =link_to "Player Page", "http://mlb.mlb.com/team/player.jsp?player_id=#{player.mlb_id}", target: '_blank'
-              -else
-                p PROSPECT
-            td
-              = button_to "Drop Player", {action: "update",id: "#{player.roster.id}", player_id: "#{player.id}"}, method: :put

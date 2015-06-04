@@ -1,8 +1,24 @@
-div class= "col-md-3"
-div class= "col-md-6 panel panel-primary"
+div class= "col-md-2"
+div class= "col-md-8 panel panel-primary"
   div class="panel-heading" 
     div class= "panel-title" Fantasy Teams
-  div class="list-group panel-body"
-    -@users.each do |user|
-      =link_to "#{user.email}", roster_path(id: user.id), class:"list-group-item"
-div class="col-md-3"
+  div class="panel-body"
+    table class="table table-hover"
+      thead
+        tr 
+          th Go To Roster
+          th Name
+          th Roster Size
+          th Major Roster Size
+          th Minor Roster Size
+          th Starts Used
+      tbody
+        -@users.each do |user|
+          tr 
+            td=link_to "GO", roster_path(id: user.id)
+            td="#{user.email}"
+            td= user.players.count
+            td= user.rosters.find_by(forty_five: true).players.count
+            td= user.rosters.find_by(minor: true).players.count
+            td=user.starts
+div class="col-md-2"

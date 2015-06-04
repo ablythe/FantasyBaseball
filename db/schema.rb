@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513184834) do
+ActiveRecord::Schema.define(version: 20150604142939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,9 +54,22 @@ ActiveRecord::Schema.define(version: 20150513184834) do
     t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "starts",                 default: 0
+    t.integer  "yahoo_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "yahoo_api_tokens", force: :cascade do |t|
+    t.string   "oauth_token"
+    t.string   "oauth_token_secret"
+    t.string   "oauth_session_handle"
+    t.datetime "token_expires_in"
+    t.datetime "authorization_expires_in"
+    t.string   "yahoo_guid"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
 end
