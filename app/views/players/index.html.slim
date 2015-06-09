@@ -8,7 +8,7 @@ table class="table table-bordered table-condensed table-hover"
       th 
         =link_to "First Name", players_path(sort: "first_name")
       th 
-        =link_to "Position", search_index_path(last_name:@name, sort: "position")
+        =link_to "Position", players_path(sort: "position")
       th 
         =link_to "Team", players_path(sort: "team")
       -if current_user
