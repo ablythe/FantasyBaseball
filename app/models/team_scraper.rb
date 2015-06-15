@@ -116,72 +116,7 @@ class TeamScraper
     end
   end
 
-  def self.get_positions user_id
-    players = User.find(user_id).players.all 
-    players.each do |player|
-      player.get_position
-      sleep 2
-    end
-  end
-
-  def self.get_pitcher_starts day, user
-    count = 0
-    response = Nokogiri::HTML(open("http://baseball.fantasysports.yahoo.com/b1/21725/#{user}/team?&date=#{day}"))
-    pitchers = response.css('#statTable1 tbody tr')
-    pitchers.each do |pitcher|
-      words = pitcher.text.split("\n")
-      if TeamScraper.filter_pitchers words
-        count += 1
-      end
-    end
-    count
-  end
-
-  def self.filter_pitchers line
-    line.first.rstrip == "SP" && 
-    line.last[/-{3,}/] == nil && 
-    line.last.split(',').last[/%0/] == nil
-  end
-
-  def self.past_starts  id
-    user = User.find(id)
-    starts = user.starts
-    yahoo = user.yahoo_id
-    today_month= DateTime.yesterday.month 
-    today_day = DateTime.yesterday.day
-    month_diff = today_month - 4 + 1
-    month = 4
-    month_diff.times do 
-      unless month == today_month
-        (Calendar.month_first_day(month)..Calendar.month_last_day(month)).each do |day|
-          starts +=TeamScraper.past_starts_helper(month, day, yahoo)
-          sleep 1
-        end
-      else
-        (Calendar.month_first_day(month)..today_day).each do |day|
-          starts +=TeamScraper.past_starts_helper(month, day, yahoo)
-        end
-      end
-      month += 1
-    end
-    user.update(starts: starts)
-  end
-
-
-
-  def self.past_starts_helper month, day, user
-    count = 0
-    if month == 10
-      count += TeamScraper.get_pitcher_starts("2015-#{month}-0#{day}", user)
-    elsif day < 10 
-      count += TeamScraper.get_pitcher_starts("2015-0#{month}-0#{day}", user)
-    else
-      count += TeamScraper.get_pitcher_starts("2015-0#{month}-#{day}", user)
-    end
-    count
-  end
-
-
+  
   #not currently used
   def self.get_milb_leagues
     #gets the league ids, using the VSL page, so that one gets preloaded into the league array
