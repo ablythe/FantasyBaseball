@@ -5,7 +5,7 @@ class Player < ActiveRecord::Base
 
   def self.load_players players, team 
    players.each do |player|
-    p =player.split(', ')
+    p = player.split(', ')
     id = p[0][/[0-9]+/].to_i
     name = p[1].split(" ")
     first = name.shift
@@ -17,6 +17,15 @@ class Player < ActiveRecord::Base
       team: team
       )
     end
+  end
+
+  def self.parse_roster_names file
+    names = []
+    f = File.open("./rosters/#{file}", "r")
+    f.each_line do |line|
+      names.push Player.clean_lines line
+    end
+    names
   end
 
   def self.clean_lines line
@@ -31,55 +40,6 @@ class Player < ActiveRecord::Base
         last  = name.join(" ").strip.downcase
       end
     return [first, last]
-  end
-
-  def self.parse_roster_names file
-    names = []
-    f = File.open("./rosters/#{file}", "r")
-    f.each_line do |line|
-      names.push Player.clean_lines line
-    end
-    names
-  end
-
-  def self.load_rosters names, id, level
-    unknowns =[]
-    roster = User.find(id).rosters.find_by("#{level}": true)
-    binding.pry
-    names.each do |first, last|
-      player = Player.where(last_name: last, first_name: first)
-      unless player.count > 1 || player.empty?
-        player[0].update(user_id: id, roster_id: roster.id )
-      else
-        unknowns.push [last, first]
-      end
-    end
-    unknowns
-  end
-
-  def self.parse_rookie_file file
-    names = []
-    f =File.open("./#{file}", "r")
-    f.each_line do |line|
-      line_array =line.split(",")
-      names.push line_array[1].downcase
-    end
-    names
-  end
-
-  def self.load_rookie_eligibility names
-    unknowns =[]
-    Player.update_all(rookie_status: false)
-    names.each do |name|
-      name_array = name.split(" ")
-      matches= Player.where(first_name: name_array[0], last_name: name_array[1])
-      if matches.count > 1 
-        unknowns.push name_array
-      elsif !matches.empty?
-        matches[0].update!(rookie_status: true)
-      end
-    end
-    unknowns
   end
 
   def get_position 

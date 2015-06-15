@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-
+  skip_before_filter :authenticate_user!
   def create
     new_params = {
       first_name: params['first_name'], 

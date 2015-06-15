@@ -9,5 +9,20 @@ class Roster <ActiveRecord::Base
       u.rosters.create(minor: true)
     end     
   end
+
+  def self.load_players names, id, level
+    unknowns =[]
+    roster = User.find(id).rosters.find_by("#{level}": true)
+    binding.pry
+    names.each do |first, last|
+      player = Player.where(last_name: last, first_name: first)
+      unless player.count > 1 || player.empty?
+        player[0].update(user_id: id, roster_id: roster.id )
+      else
+        unknowns.push [last, first]
+      end
+    end
+    unknowns
+  end
     
 end

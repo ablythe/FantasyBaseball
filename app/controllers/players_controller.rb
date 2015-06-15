@@ -6,6 +6,7 @@ class PlayersController < ApplicationController
     else
       sort = params["sort"]
     end
+    
     unless params["page"]
       @page = 1
     else

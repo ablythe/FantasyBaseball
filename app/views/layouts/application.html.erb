@@ -24,10 +24,9 @@
           <li><%= link_to "Player Roster", players_path %><li>
           <li><%= link_to "Fantasy Teams", rosters_path %><li>
           <li><%= link_to "My Team", roster_path(id: current_user) %><li>
-          <li><%= link_to "Advanced Search", new_search_path %><li>
           <% end %>
+          <li><%= link_to "Advanced Search", new_search_path %><li>
         </ul>
-        <% if user_signed_in? %>
           <div class='navbar-form navbar-right"'>
             <%=form_tag("/players/search", method: "post") do %>
               <div class="form-group">
@@ -37,7 +36,6 @@
               </div>
             <% end %>
           </div>
-        <% end %>
       </div>
     </div>
   </div>
