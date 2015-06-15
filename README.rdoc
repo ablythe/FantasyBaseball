@@ -1,5 +1,10 @@
 {<img src="https://codeclimate.com/github/ablythe/FantasyBaseball/badges/gpa.svg" />}[https://codeclimate.com/github/ablythe/FantasyBaseball]
 
+{<img src="https://travis-ci.org/ablythe/FantasyBaseball.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/ablythe/FantasyBaseball]
+
+
+{<img src="https://coveralls.io/repos/ablythe/FantasyBaseball/badge.svg" alt="Coverage Status" />}[https://coveralls.io/r/ablythe/FantasyBaseball]
+
 Uses PhantomJs and Nokogiri for scraping.
 
 Creates a searchable database of baseball players, including minor leagues and top 30 prospects per team.

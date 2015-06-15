@@ -52,6 +52,7 @@ gem 'phantomjs'
 gem 'kaminari'
 gem 'pg'
 gem 'oauth-plugin'
+gem 'coveralls', require: false
 
 gem 'rails_12factor'
 group :development, :test do
