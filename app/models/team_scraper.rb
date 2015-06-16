@@ -1,7 +1,7 @@
 class TeamScraper 
   require 'open-uri'
 
-  TEAMS = teams = %w(bal bos nyy tb tor cws cle det kc min hou ana oak sea tex atl mia nym phi was chc cin mil pit stl ari col la sd sf)
+  TEAMS = %w(bal bos nyy tb tor cws cle det kc min hou ana oak sea tex atl mia nym phi was chc cin mil pit stl ari col la sd sf)
   TEAMNAMES = {
    'baltimore orioles': 'bal',
    'boston red sox': 'bos',
