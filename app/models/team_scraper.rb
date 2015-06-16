@@ -116,39 +116,6 @@ class TeamScraper
     end
   end
 
-  
-  #not currently used
-  def self.get_milb_leagues
-    #gets the league ids, using the VSL page, so that one gets preloaded into the league array
-    leagues =[['Venezualan Summer League (Rookie)', 134]]
-    response = Nokogiri::HTML(open("http://www.milb.com/index.jsp?sid=l134"))
-    team_data = response.css('div#other_leagues_nav li')
-    team_data.each do |league|
-      name = league.text[1...-1]
-      id = league.css('a')[0]['href'][-3..-1].to_i
-      #Mexican League doesn't use same team and player id system so must be omitted.
-      unless id ==125 
-        leagues.push [name, id]
-      end
-    end
-    leagues
-  end
-
-  #old method for getting milb team_ids, use get_milb_teams instead
-  def self.get_milb_team_ids leagues
-    teams = []
-    leagues.each do |league|
-      response = Nokogiri::HTML(open("http://www.milb.com/index.jsp?sid=l#{league[1]}"))
-      links = response.xpath('//a[@href[contains(.,"index.jsp?sid=t")]]')
-      links.each do |link|
-        name = link.text
-        id = link['href'][/[0-9]+/].to_i
-        teams.push id
-      end
-      sleep 2
-    end
-    teams
-  end
 
 
 

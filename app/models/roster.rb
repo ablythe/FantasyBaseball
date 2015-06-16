@@ -10,10 +10,9 @@ class Roster <ActiveRecord::Base
     end     
   end
 
-  def self.load_players names, id, level
+  def load_players names, id, level
     unknowns =[]
     roster = User.find(id).rosters.find_by("#{level}": true)
-    binding.pry
     names.each do |first, last|
       player = Player.where(last_name: last, first_name: first)
       unless player.count > 1 || player.empty?
