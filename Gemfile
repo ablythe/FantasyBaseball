@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-ruby '2.2.0'
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -52,7 +52,7 @@ gem 'phantomjs'
 gem 'kaminari'
 gem 'pg'
 gem 'oauth-plugin'
-gem 'coveralls', require: false
+# gem 'coveralls', require: false
 
 gem 'rails_12factor'
 group :development, :test do
@@ -62,9 +62,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'quiet_assets'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
 end
 
 group :test do
+  gem 'database_cleaner'
   gem 'simplecov'
   gem 'zonebie'
 end

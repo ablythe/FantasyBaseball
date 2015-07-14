@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/ablythe/src/FantasyBaseball/spec/models/team_scraper_spec.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/spec/models/yahoo_team_start_tabulator_spec.rb": [
         1,
         null,
         1,
@@ -9,11 +9,38 @@
         1,
         1,
         1,
+        null,
         1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/spec/rails_helper.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -65,14 +92,14 @@
         1,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/environment.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/application.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/application.rb": [
         1,
         null,
         1,
@@ -101,12 +128,12 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/boot.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/boot.rb": [
         1,
         null,
         1
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/environments/test.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/environments/test.rb": [
         1,
         null,
         null,
@@ -150,7 +177,7 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/initializers/assets.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -163,7 +190,7 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/initializers/backtrace_silencers.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -172,12 +199,12 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/initializers/cookies_serializer.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/initializers/cookies_serializer.rb": [
         null,
         null,
         1
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/initializers/devise.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/initializers/devise.rb": [
         null,
         null,
         1,
@@ -438,13 +465,13 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/initializers/filter_parameter_logging.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/initializers/inflections.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -462,18 +489,18 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/initializers/mime_types.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/initializers/session_store.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/initializers/session_store.rb": [
         null,
         null,
         1
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/initializers/wrap_parameters.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -489,7 +516,7 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/spec/factories/players.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/spec/factories/players.rb": [
         1,
         1,
         1,
@@ -499,7 +526,17 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/spec/factories/team_scrapers.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/spec/factories/team_pitching_stats_for_days.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/geoff/github/ablythe/FantasyBaseball/spec/factories/team_scrapers.rb": [
         1,
         1,
         null,
@@ -507,7 +544,7 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/spec/factories/users.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/spec/factories/users.rb": [
         1,
         1,
         1,
@@ -516,7 +553,7 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/config/routes.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/config/routes.rb": [
         1,
         1,
         null,
@@ -533,7 +570,7 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/app/models/user.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/app/models/user.rb": [
         1,
         null,
         null,
@@ -606,27 +643,27 @@
         null,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/app/helpers/application_helper.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/app/helpers/players_helper.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/app/helpers/players_helper.rb": [
         1,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/app/helpers/rosters_helper.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/app/helpers/rosters_helper.rb": [
         1,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/app/helpers/search_helper.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/app/helpers/search_helper.rb": [
         1,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/app/helpers/tracker_helper.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/app/helpers/tracker_helper.rb": [
         1,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/spec/support/devise.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/spec/support/devise.rb": [
         1,
         1,
         null,
@@ -634,130 +671,87 @@
         1,
         0,
         0,
-        null,
-        null,
-        1,
-        null
-      ],
-      "/Users/ablythe/src/FantasyBaseball/spec/support/focus.rb": [
-        1,
-        1,
-        1,
-        null
-      ],
-      "/Users/ablythe/src/FantasyBaseball/spec/support/json.rb": [
-        1,
-        1,
-        1,
-        0,
-        0,
-        null,
-        0,
-        null,
         null,
         null,
         1,
         null
       ],
-      "/Users/ablythe/src/FantasyBaseball/app/models/team_scraper.rb": [
+      "/Users/geoff/github/ablythe/FantasyBaseball/spec/support/focus.rb": [
         1,
         1,
-        null,
+        1,
+        null
+      ],
+      "/Users/geoff/github/ablythe/FantasyBaseball/spec/support/json.rb": [
         1,
         1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         1,
+        0,
+        0,
         null,
         0,
         null,
         null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        null,
         null,
         1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        0,
-        null,
+        null
+      ],
+      "/Users/geoff/github/ablythe/FantasyBaseball/app/models/yahoo_team_start_tabulator.rb": [
+        1,
         null,
         1,
         1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
+        2,
+        2,
         null,
         null,
         1,
         2,
+        null,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
         2,
-        30,
-        30,
-        30,
-        464,
-        232,
-        232,
         null,
         null,
-        null,
+        1,
         2,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        2,
+        20,
+        20,
+        4,
+        null,
+        null,
+        20,
+        null,
+        null,
+        null
+      ],
+      "/Users/geoff/github/ablythe/FantasyBaseball/app/models/team_pitching_stats_for_day.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/geoff/github/ablythe/FantasyBaseball/app/models/pitcher.rb": [
+        1,
         null,
         null,
         1,
@@ -765,25 +759,22 @@
         0,
         0,
         0,
+        null,
         0,
         null,
+        0,
+        null,
+        0,
         null,
         null,
         1,
-        0,
-        0,
-        0,
-        0,
-        0,
         null,
-        null,
-        null,
-        null,
+        20,
         null,
         null,
         null
       ]
     },
-    "timestamp": 1434468800
+    "timestamp": 1436726590
   }
 }

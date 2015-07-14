@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604142939) do
+ActiveRecord::Schema.define(version: 20150712175259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20150604142939) do
     t.boolean "forty_five"
     t.boolean "minor"
   end
+
+  create_table "team_pitching_stats_for_days", force: :cascade do |t|
+    t.integer  "user_id"
+    t.date     "date",                        null: false
+    t.integer  "pitching_starts", default: 0, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "team_pitching_stats_for_days", ["user_id", "date"], name: "index_team_pitching_stats_for_days_on_user_id_and_date", unique: true, using: :btree
+  add_index "team_pitching_stats_for_days", ["user_id"], name: "index_team_pitching_stats_for_days_on_user_id", using: :btree
 
   create_table "team_scrapers", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -72,4 +83,5 @@ ActiveRecord::Schema.define(version: 20150604142939) do
     t.datetime "updated_at",               null: false
   end
 
+  add_foreign_key "team_pitching_stats_for_days", "users"
 end

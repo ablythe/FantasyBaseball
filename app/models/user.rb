@@ -8,12 +8,12 @@ class User < ActiveRecord::Base
 
   def self.load_users_starts
     User.all.each do |u|
-      u.update_starts 
-    end 
+      u.update_starts
+    end
   end
 
-  def get_player_positions 
-    players = self.players.all 
+  def get_player_positions
+    players = self.players.all
     players.each do |player|
       player.get_position
       sleep 2
@@ -34,13 +34,13 @@ class User < ActiveRecord::Base
     count
   end
 
-  def update_starts 
+  def update_starts
     starts = 0
-    today_month= DateTime.yesterday.month 
+    today_month= DateTime.yesterday.month
     today_day = DateTime.yesterday.day
     month = 4
     month_diff = today_month - month + 1
-    month_diff.times do 
+    month_diff.times do
       unless month == today_month
         (Calendar.month_first_day(month)..Calendar.month_last_day(month)).each do |day|
           starts +=Pitcher.past_starts_helper(month, day, self.id)
@@ -58,14 +58,14 @@ class User < ActiveRecord::Base
 
 
 
-  
-
-  
-
-  
 
 
 
-  
+
+
+
+
+
+
 
 end
