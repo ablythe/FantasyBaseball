@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
   def self.load_users_starts
     User.all.each do |u|
       u.update_starts
-      self.team_pitching_stats_for_days.sum(:pitching_starts)
+      starts = self.team_pitching_stats_for_days.sum(:pitching_starts)
+      u.update!(starts: starts)
       sleep 5
     end
   end
