@@ -5,10 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :players
   has_many :rosters
+  has_many :team_pitching_stats_for_days
 
   def self.load_users_starts
     User.all.each do |u|
       u.update_starts
+      self.team_pitching_stats_for_days.sum(:pitching_starts)
+      sleep 5
     end
   end
 
@@ -43,17 +46,19 @@ class User < ActiveRecord::Base
     month_diff.times do
       unless month == today_month
         (Calendar.month_first_day(month)..Calendar.month_last_day(month)).each do |day|
-          starts +=Pitcher.past_starts_helper(month, day, self.id)
-          sleep 1
+          date = Date.new(2015, month, day)
+          YahooTeamStartTabulator.new(self, date).go
+          sleep 3
         end
       else
         (Calendar.month_first_day(month)..today_day).each do |day|
-          starts +=Pitcher.past_starts_helper(month, day, self.id)
+          date = Date.new(2015, month, day)
+          YahooTeamStartTabulator.new(self, date).go
+          sleep 3
         end
       end
       month += 1
     end
-    self.update(starts: starts)
   end
 
 
