@@ -4,6 +4,7 @@ div class= "col-md-8 panel panel-primary"
     div class= "panel-title" Fantasy Teams
   div class="panel-body"
     table class="table table-hover"
+      caption= "Last Updated #{@last_updated}"
       thead
         tr 
           th Go To Roster
@@ -12,6 +13,7 @@ div class= "col-md-8 panel panel-primary"
           th Major Roster Size
           th Minor Roster Size
           th Starts Used
+          th Starts Remaining
       tbody
         -@users.each do |user|
           tr 
@@ -21,4 +23,6 @@ div class= "col-md-8 panel panel-primary"
             td= user.rosters.find_by(forty_five: true).players.count
             td= user.rosters.find_by(minor: true).players.count
             td=user.starts
+            td= 195 - user.starts
+
 div class="col-md-2"

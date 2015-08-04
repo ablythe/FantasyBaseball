@@ -2,6 +2,7 @@ class RostersController < ApplicationController
 
   def index
     @users = User.all
+    @last_updated = TeamPitchingStatsForDay.last.date
   end
 
   def show
