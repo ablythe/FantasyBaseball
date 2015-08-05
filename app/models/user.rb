@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   def self.load_users_starts
     User.all.each do |u|
       u.update_starts
-      starts = self.team_pitching_stats_for_days.sum(:pitching_starts)
+      starts = u.team_pitching_stats_for_days.sum(:pitching_starts)
       u.update!(starts: starts)
       sleep 5
     end
@@ -45,11 +45,13 @@ class User < ActiveRecord::Base
     today_month= DateTime.yesterday.month
     today_day = DateTime.yesterday.day
     if last_update_month == nil
-      month = 4
+      last_update_month = 4
+      last_update_day = 5
     end
-    month_diff = today_month - month + 1
+    month_diff = today_month - last_update_month + 1
+    month = last_update_month
     month_diff.times do
-      unless month == today_month
+      unless last_update_month == today_month
         (Calendar.month_first_day(month)..Calendar.month_last_day(month)).each do |day|
           date = Date.new(2015, month, day)
           YahooTeamStartTabulator.new(self, date).go

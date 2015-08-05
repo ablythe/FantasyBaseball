@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   end
 
 
-  resources :rosters, only: [:index, :show, :update]
+  resources :rosters, only: [:index, :show, :update] 
+  scope "/rosters" do
+    post "update_starts", to: 'rosters#starts'
+  end
     
 end

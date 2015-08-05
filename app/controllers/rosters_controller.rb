@@ -36,5 +36,10 @@ class RostersController < ApplicationController
     redirect_to roster_path(current_user.rosters.first), alert: "Roster Updated"
   end
 
+  def starts
+    User.load_users_starts
+    redirect_to :back
+  end
+
   
 end

@@ -1,5 +1,7 @@
 div class= "col-md-2"
 div class= "col-md-8 panel panel-primary"
+  -if current_user.id == 1
+    =button_to "Update Starts", update_starts_path
   div class="panel-heading" 
     div class= "panel-title" Fantasy Teams
   div class="panel-body"
