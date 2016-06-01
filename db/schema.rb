@@ -20,13 +20,12 @@ ActiveRecord::Schema.define(version: 20150712175259) do
     t.integer  "mlb_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "user_id"
+    t.integer  "roster_id"
     t.string   "team"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
     t.string   "position"
     t.boolean  "rookie_status", default: false
-    t.integer  "roster_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "rosters", force: :cascade do |t|
@@ -63,25 +62,14 @@ ActiveRecord::Schema.define(version: 20150712175259) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "username"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "starts",                 default: 0
     t.integer  "yahoo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "yahoo_api_tokens", force: :cascade do |t|
-    t.string   "oauth_token"
-    t.string   "oauth_token_secret"
-    t.string   "oauth_session_handle"
-    t.datetime "token_expires_in"
-    t.datetime "authorization_expires_in"
-    t.string   "yahoo_guid"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
 
   add_foreign_key "team_pitching_stats_for_days", "users"
 end

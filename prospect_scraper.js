@@ -3,7 +3,7 @@ var system = require('system');
 var args = system.args;
 args.shift();
 var team = args[0];
-var url = 'http://m.mlb.com/prospects/2015?list=' + team;
+var url = 'http://m.mlb.com/prospects/2016?list=' + team;
 
 page.open(url, function(status) {
     var links = page.evaluate(function() {

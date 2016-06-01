@@ -31,6 +31,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
 
       t.string :username
+      t.integer :starts, default: 0
+      t.integer :yahoo_id
       t.timestamps
     end
 
