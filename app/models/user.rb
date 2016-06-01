@@ -42,9 +42,7 @@ class User < ActiveRecord::Base
     last_update = Date.parse('2016-04-05')
     unless self.team_pitching_stats_for_days.length == 0
       last_update = self.team_pitching_stats_for_days.last.date
-      binding.pry
     end
-    binding.pry
     yesterdays_date = Date.yesterday
     dates_since_last_check = (last_update..yesterdays_date).map(&:to_s)
     dates_since_last_check.each do |day|
