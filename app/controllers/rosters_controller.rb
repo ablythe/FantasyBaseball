@@ -2,7 +2,7 @@ class RostersController < ApplicationController
 
   def index
     @users = User.all
-    @last_updated = TeamPitchingStatsForDay.last.date
+    @last_updated = TeamPitchingStatsForDay.try(:last).try(:date)
   end
 
   def show
@@ -38,7 +38,7 @@ class RostersController < ApplicationController
 
   def starts
     User.load_users_starts
-    redirect_to :back
+    render nothing: true
   end
 
   

@@ -1,7 +1,7 @@
 div class= "col-md-2"
 div class= "col-md-8 panel panel-primary"
   -if current_user.id == 1
-    =button_to "Update Starts", update_starts_path
+    button id='update-button' href='#' Update Starts
   div class="panel-heading" 
     div class= "panel-title" Fantasy Teams
   div class="panel-body"
@@ -22,7 +22,7 @@ div class= "col-md-8 panel panel-primary"
             td=link_to "GO", roster_path(id: user.id)
             td="#{user.email}"
             td= user.players.count
-            td= user.rosters.find_by(forty_five: true).players.count
+            td= user.rosters.find_by(forty_five: true).players.try(:count)
             td= user.rosters.find_by(minor: true).players.count
             td=user.starts
             td= 195 - user.starts

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150712175259) do
     t.integer  "mlb_id"
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "user_id"
     t.integer  "roster_id"
     t.string   "team"
     t.string   "position"
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150712175259) do
 
   create_table "rosters", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "roster_id"
     t.boolean "forty_five"
     t.boolean "minor"
   end
