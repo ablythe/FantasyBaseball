@@ -1,43 +1,43 @@
-class TeamScraper 
+class TeamScraper
   require 'open-uri'
 
   TEAMS = %w(bal bos nyy tb tor cws cle det kc min hou ana oak sea tex atl mia nym phi was chc cin mil pit stl ari col la sd sf)
   TEAMNAMES = {
    'baltimore orioles': 'bal',
    'boston red sox': 'bos',
-   'new york yankees': 'nyy',  
+   'new york yankees': 'nyy',
    'tampa bay rays': 'tb',
    'toronto blue jays': 'tor',
    'chicago white sox': 'cws',
    'cleveland indians': 'cle',
    'detroit tigers': 'det',
-   'kansas city royals': 'kc', 
-   'minnesota twins': 'min', 
-   'houston astros': 'hou', 
-   'los angeles angels of anaheim': 'ana', 
-   "oakland a's": 'oak', 
+   'kansas city royals': 'kc',
+   'minnesota twins': 'min',
+   'houston astros': 'hou',
+   'los angeles angels of anaheim': 'ana',
+   "oakland a's": 'oak',
    'seattle mariners': 'sea',
-   'texas rangers': 'tex', 
-   'atlanta braves': 'atl', 
-   'miami marlins': 'mia', 
-   'new york mets': 'nym', 
-   'philadelphia phillies': 'phi', 
-   'washington nationals': 'was', 
-   'chicago cubs': 'chc', 
-   'cincinnati reds': 'cin', 
-   'milwaukee brewers': 'mil', 
-   'pittsburgh pirates': 'pit', 
-   'st. louis cardinals': 'stl', 
-   'arizona diamondbacks': 'ari', 
-   'colorado rockies': 'col', 
-   'los angeles dodgers': 'la', 
+   'texas rangers': 'tex',
+   'atlanta braves': 'atl',
+   'miami marlins': 'mia',
+   'new york mets': 'nym',
+   'philadelphia phillies': 'phi',
+   'washington nationals': 'was',
+   'chicago cubs': 'chc',
+   'cincinnati reds': 'cin',
+   'milwaukee brewers': 'mil',
+   'pittsburgh pirates': 'pit',
+   'st. louis cardinals': 'stl',
+   'arizona diamondbacks': 'ari',
+   'colorado rockies': 'col',
+   'los angeles dodgers': 'la',
    'san diego padres': 'sd',
    'san francisco giants': 'sf'
  }
 
  def self.scrape!
     #mlb players
-    TeamScraper.get_mlb_players 
+    TeamScraper.get_mlb_players
 
     #milb players
     al_teams = TeamScraper.get_milb_teams_al
@@ -49,18 +49,17 @@ class TeamScraper
     TeamScraper.get_mlb_prospects
   end
 
-  def self.get_mlb_players 
-    TEAMS.each do |team| 
+  def self.get_mlb_players
+    TEAMS.each do |team|
       response = Nokogiri::HTML(open("http://mlb.com/team/roster_40man.jsp?c_id=#{team}"))
       player_data = response.css('div#roster_40_man tbody tr')
       player_data.each do |p|
         id = p.css('a')[0]['href'][/[0-9]+/].to_i
         name = p.css('a')[0].text.split(' ')
-        first = name.shift
-        last = name.join(" ")
+        first, last = Player.split_name name
         p =Player.where(mlb_id: id).first_or_create(
-          first_name: first.downcase, 
-          last_name: last.downcase, 
+          first_name: first,
+          last_name: last,
           mlb_id: id,
           team: team
           )
@@ -104,10 +103,10 @@ class TeamScraper
       players= response.split("\n")
       Player.load_players players, team
       sleep 5
-    end    
+    end
   end
 
-  def self.get_mlb_prospects 
+  def self.get_mlb_prospects
     TEAMS.each do |team|
       response = `Phantomjs prospect_scraper.js #{team}`
       players = response.split("\n")

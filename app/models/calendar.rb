@@ -1,7 +1,7 @@
 class Calendar
 
   def self.month_first_day month
-    if month == 4 
+    if month == 4
       return 5
     else
       return 1
@@ -9,11 +9,11 @@ class Calendar
   end
 
   def self.month_last_day month
-    if month == 4 || month == 6 || month == 9
+    if [4,6,9].include? month
       return 30
-    elsif month == 5 || month = 7 || month == 8
+    elsif [5,7,8].include? month
       return 31
-    elsif month == 10
+    else
       return 4
     end
   end
